@@ -5,18 +5,37 @@ relevance and urgency — not popularity.
 
 ## Quick start
 
-CampusConnect stores data in **Postgres**, so you need a connection string before the server will
-start. [Neon](https://neon.tech) has a free tier that works well; create a project, then use a
-separate Neon *branch* for local development so you never write test data into live student data.
+Needs **Node 20+** and nothing else — no Postgres installation required. `npm run db` runs a real
+Postgres locally, bundled as a dev dependency.
 
 ```bash
-npm run install:all                      # install root, server and client dependencies
-cp server/.env.example server/.env       # then paste your DATABASE_URL into server/.env
-npm run seed                             # create tables + load demo users and requests
-npm run dev                              # start API (:4000) and web app (:5173)
+npm run install:all   # install root, server and client dependencies
+npm run setup         # create server/.env and prepare the local Postgres
+npm run db            # terminal 1 — start Postgres (leave running)
+npm run seed          # terminal 2 — create tables + load demo data
+npm run dev           # terminal 2 — start API (:4000) and web app (:5173)
 ```
 
 Open http://localhost:5173
+
+Prefer a single terminal? `npm run dev:local` starts the database, API and web app together, but
+you still need `npm run setup` and `npm run seed` first.
+
+`npm run setup` is safe to re-run and never overwrites an existing `server/.env`. It generates a
+random `JWT_SECRET` per machine, so no two clones share a signing key.
+
+### Using hosted Postgres instead
+
+To point at [Neon](https://neon.tech) or Supabase rather than the local database, edit
+`server/.env`:
+
+```
+DATABASE_URL=postgresql://…   # your connection string
+DATABASE_SSL=true             # hosted providers require TLS
+```
+
+Then skip `npm run db` and just run `npm run dev`. Use a separate Neon *branch* for development so
+you never write test data into live student data.
 
 ### Demo accounts
 
