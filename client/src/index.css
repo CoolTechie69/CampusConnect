@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #06090a;
+  --color-surface: #0e1512;
+  --color-surface-2: #131c18;
+  --color-border: #1e2b24;
+  --color-green: #22e07a;
+  --color-green-dim: #16a34a;
+  --color-green-bright: #4dff9f;
+  --color-text: #e6f2ea;
+  --color-text-dim: #8ea79a;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Dim ambient background layers — decorative, never interactive. */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34, 224, 122, 0.07), transparent 70%),
+    linear-gradient(180deg, #070b0a 0%, var(--color-bg) 45%, #05080a 100%);
+}
+
+.bg-fx-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(120, 200, 160, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 200, 160, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 30%, transparent 100%);
+}
+
+.bg-fx-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(34, 224, 122, 0.1), transparent 65%);
+  filter: blur(28px);
+  will-change: transform;
+}
+
+.bg-fx-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 80% at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green-dim);
+}
+
+.glow-text {
+  text-shadow: 0 0 12px rgba(34, 224, 122, 0.5);
+}
+
+/* Translucent so the ambient background reads through the UI. */
+.card-surface {
+  background: linear-gradient(180deg, rgba(16, 24, 20, 0.72), rgba(12, 19, 16, 0.72));
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-interactive:hover {
+  box-shadow: 0 8px 30px -12px rgba(34, 224, 122, 0.25);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}

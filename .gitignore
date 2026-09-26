@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+# Secrets
+.env
+.env.local
+
+# Local database files — never commit these, they contain real user data
+server/.pgdata/
+server/data/
+
+*.log
