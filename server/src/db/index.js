@@ -90,8 +90,19 @@ const SCHEMA = `
   CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id);
 `;
 
-async function init() {
-  await pool.query(SCHEMA);
+// Retry briefly: a local Postgres may still be starting, and hosted providers
+// like Neon can refuse the first connection while waking from idle.
+async function init({ attempts = 5, delayMs = 2000 } = {}) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      await pool.query(SCHEMA);
+      return;
+    } catch (err) {
+      if (attempt >= attempts) throw err;
+      console.log(`Database not ready (${err.message}); retrying in ${delayMs / 1000}s…`);
+      await new Promise((r) => setTimeout(r, delayMs));
+    }
+  }
 }
 
 module.exports = { pool, all, get, run, init };

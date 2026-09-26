@@ -5,8 +5,11 @@
   "description": "College-only peer help platform — matches students to helpers by academic relevance, not popularity",
   "scripts": {
     "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "setup": "node scripts/setup.js",
+    "db": "node server/scripts/local-db.js",
     "seed": "npm --prefix server run seed",
     "dev": "concurrently -n api,web -c green,cyan \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:local": "concurrently -n db,api,web -c magenta,green,cyan \"npm run db\" \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
     "build": "npm --prefix server install --omit=dev && npm --prefix client install && npm --prefix client run build",
     "start": "npm --prefix server start"
   },
