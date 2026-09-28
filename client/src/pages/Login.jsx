@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import hitamLogo from '../assets/hitam-logo.png';
 
 export default function Login() {
   const { login } = useAuth();
@@ -28,8 +29,15 @@ export default function Login() {
     <div className="flex min-h-screen items-center justify-center px-4 py-10">
       <div className="grid w-full max-w-5xl gap-10 md:grid-cols-2 md:items-center">
         <div className="hidden md:block">
-          <h1 className="text-5xl font-bold leading-tight">
-            <span className="text-green glow-text">Campus</span>Connect
+          <h1 className="flex items-center gap-3 text-5xl font-bold leading-tight">
+            <img
+              src={hitamLogo}
+              alt="HITAM"
+              className="h-14 w-14 rounded-xl ring-1 ring-green/30"
+            />
+            <span>
+              <span className="text-green glow-text">Campus</span>Connect
+            </span>
           </h1>
           <p className="mt-4 text-lg text-text-dim">
             A college-only peer help platform that matches you to the right helper based on academic

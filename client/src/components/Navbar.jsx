@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../context/SocketContext';
 import api from '../api';
 import Avatar from './Avatar';
+import hitamLogo from '../assets/hitam-logo.png';
 
 const navLinkClass = ({ isActive }) =>
   `px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
@@ -48,7 +49,12 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-40 border-b border-border bg-bg/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2.5">
+          <img
+            src={hitamLogo}
+            alt="HITAM"
+            className="h-9 w-9 rounded-lg ring-1 ring-green/30"
+          />
           <span className="text-xl font-bold tracking-tight text-green glow-text">Campus</span>
           <span className="text-xl font-bold tracking-tight text-text">Connect</span>
         </Link>

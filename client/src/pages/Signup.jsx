@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import TagInput from '../components/TagInput';
+import hitamLogo from '../assets/hitam-logo.png';
 
 const DEPARTMENTS = [
   'Computer Science',
@@ -52,8 +53,11 @@ export default function Signup() {
   return (
     <div className="flex min-h-screen items-center justify-center px-4 py-10">
       <div className="card-surface w-full max-w-lg rounded-2xl p-8">
-        <h1 className="text-2xl font-bold">
-          Join <span className="text-green glow-text">CampusConnect</span>
+        <h1 className="flex items-center gap-2.5 text-2xl font-bold">
+          <img src={hitamLogo} alt="HITAM" className="h-9 w-9 rounded-lg ring-1 ring-green/30" />
+          <span>
+            Join <span className="text-green glow-text">CampusConnect</span>
+          </span>
         </h1>
         <p className="mt-1 text-sm text-text-dim">
           Open to <span className="text-green">@hitam.org</span> students only. Your department and
